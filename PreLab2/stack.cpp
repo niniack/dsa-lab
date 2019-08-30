@@ -43,21 +43,21 @@ void Queue :: pop(){
 
   if (head == NULL) {
     cout << "Bottom of the stack, nothing to remove";
-    exit(1);
   }
+  else{
+    // move the head to the temp variable
+    temp = head;
 
-  // move the head to the temp variable
-  temp = head;
+    // set the new head to the value below the old head
+    head = head->below;
 
-  // set the new head to the value below the old head
-  head = head->below;
+    // remove the link of the old head to the new head
+    temp->below = NULL;
 
-  // remove the link of the old head to the new head
-  temp->below = NULL;
-
-  // free the old head from memory
-  delete(temp);
-  --stackSize;
+    // free the old head from memory
+    delete(temp);
+    --stackSize;
+  }
 }
 
 // utility function to display the contents of the stack from top to bottom
