@@ -1,31 +1,37 @@
-//  File: stack.hpp
+//  File: m2.h
 //  Name: Nishant Aswani
 //  Instructor: Cristoforos Vasilatos
 //  Course: Data Structures and Algorithms (ENGR-UH 3510) Fall 2019
 //  Due: Sep 2 2019
 
-#ifndef STACK_HPP
-#define STACK_HPP
+#ifndef MILESTONE2_H
+#define MILESTONE2_H
 
 using namespace std;
 
-struct Node{
-    int data;
+class Node{
+  public:
+    long int data;
     Node *below;
 };
 
-class Queue{
+class Stack{
   public:
     int stackSize;
+    int isbn = 123456789;
     Node *head;
+    Node *tail;
   public:
-    Queue();
-    ~Queue();
+    Stack();
+    ~Stack();
     void push(int data);
     void pop();
     void print() const;
     void getStackSize() const;
+  private:
     void getHeadValue() const;
+    void getTailValue() const;
+    void getISBN() const;
 };
 
 #endif

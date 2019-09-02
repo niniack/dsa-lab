@@ -4,11 +4,9 @@
 //  Course: Data Structures and Algorithms (ENGR-UH 3510) Fall 2019
 //  Due: Sep 2 2019
 
-#include "stack.hpp"
+#include "stack.h"
 #include <iostream>
-
-
-#include "stack.cpp"
+// #include "stack.cpp"
 
 
 using namespace std;

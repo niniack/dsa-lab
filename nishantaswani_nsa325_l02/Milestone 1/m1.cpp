@@ -1,26 +1,27 @@
-//  File: stack.cpp
+//  File: m1.cpp
 //  Name: Nishant Aswani
 //  Instructor: Cristoforos Vasilatos
 //  Course: Data Structures and Algorithms (ENGR-UH 3510) Fall 2019
 //  Due: Sep 2 2019
 
-#include "stack.hpp"
+#include "m1.h"
+#include <iostream>
 
 using namespace std;
 
 //  constructor function initializes stack with a size 0
-Queue :: Queue(): stackSize(0) {};
-Queue :: ~Queue() {};
+Stack :: Stack(): stackSize(0) {};
+Stack :: ~Stack() {};
 
 //  utility function to add a node to the top of the stack
-void Queue :: push(int data) {
+void Stack :: push(int data) {
 
   // allocate memory for a new node
-  struct Node *temp = new Node();
+  class Node *temp = new Node();
 
   // check for stack overflow
   if (!temp) {
-    cout << "There is a Heap Overflow";
+    cout << "There is not enough space to add another book!";
     exit(1);
     }
 
@@ -37,23 +38,23 @@ void Queue :: push(int data) {
 }
 
 // utility function to remove a node from the top of the stack
-void Queue :: pop(){
+void Stack :: pop(){
   // allocate memory for temp var
-  struct Node *temp;
+  class Node *temp;
 
   if (head == NULL) {
-    cout << "Bottom of the stack, nothing to remove";
+    cout << "There are no more books to remove!";
   }
   else{
+    //print out relevant information
+    getISBN();
+    getHeadValue();
     // move the head to the temp variable
     temp = head;
-
     // set the new head to the value below the old head
     head = head->below;
-
     // remove the link of the old head to the new head
     temp->below = NULL;
-
     // free the old head from memory
     delete(temp);
     --stackSize;
@@ -61,34 +62,33 @@ void Queue :: pop(){
 }
 
 // utility function to display the contents of the stack from top to bottom
-void Queue :: print() const{
-
-  //  display address of the head
-  cout << "Head Address: " << head << endl;
+void Stack :: print() const{
 
   //  pointer to traverse down the linked list
-  struct Node *walk;
+  class Node *walk;
   walk = head;
-  cout << "Contents of the stack: " << endl;
+  getISBN();
   cout << "--------" << endl;
   while(walk!=NULL){
     cout << walk->data << endl;
     cout << "--------" << endl;
     walk = walk->below;
   }
-
-  getHeadValue();
   getStackSize();
   cout << endl;
 
 }
 
 // utility function to display the stack size
-void Queue :: getStackSize() const{
-  cout << "The stack size is: " << stackSize << endl;
+void Stack :: getStackSize() const{
+  cout << "Number of books: " << stackSize << endl;
+}
+
+void Stack :: getISBN() const{
+  cout << "The ISBN is: " << isbn << endl;
 }
 
 // utility function to display the value at the top of the stack
-void Queue :: getHeadValue() const{
-  cout << "The head value is: " << head->data << endl;
+void Stack :: getHeadValue() const{
+  cout << "The serial number of the book is: " << head->data << endl;
 }
