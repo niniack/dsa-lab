@@ -21,4 +21,3 @@ run :
 clean:
 	@echo "Cleaning up..."
 	rm -f core $(PROG) $(OBJS)
-	rm $(OUT).txt

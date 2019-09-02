@@ -60,28 +60,39 @@ void Stack :: pop(){
     //print out relevant information
     getISBN();
     getTailValue();
+    // cout << "Head: " << head << endl;
+    // cout << "Tail: " << tail << endl;
     // In a singly linked list we cannot easily remove the tail
     // so we must traverse the entire linked list to find the node
     // right before the final node
 
     //this while loop takes us to the second last node
 
-    if( walk != NULL){
+    if( walk->below != NULL){
       while (walk->below->below != NULL){
         walk = walk->below;
       }
+      // set the second last node to point to null
+      walk->below = NULL;
+      // move tail data to a cleanup variable
+      cleanup = tail;
+      // set tail to the second last node to make a new tail
+      tail = walk;
+      // delete the cleanup node;
+      delete(cleanup);
+      // decrement stack size
+      --stackSize;
     }
 
-    // set the second last node to point to null
-    walk->below = NULL;
-    // move tail data to a cleanup variable
-    cleanup = tail;
-    // set tail to the second last node to make a new tail
-    tail = walk;
-    // delete the cleanup node;
-    delete(cleanup);
-    // decrement stack size
-    --stackSize;
+    else {
+      cleanup = tail;
+      head = NULL;
+      tail = NULL;
+      delete(cleanup);
+      --stackSize;
+    }
+
+
   }
 }
 
