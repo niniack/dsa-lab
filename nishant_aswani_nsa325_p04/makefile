@@ -1,8 +1,9 @@
 #  File: makefile
 #  Name: Nishant Aswani
 #  Instructor: Cristoforos Vasilatos
+#  Assignment: Prelab 4
 #  Course: Data Structures and Algorithms (ENGR-UH 3510) Fall 2019
-#  Due: Sep 2 2019
+#  Due: Sep 16 2019
 
 PROG = prelab4
 OUT = prelab4_output
