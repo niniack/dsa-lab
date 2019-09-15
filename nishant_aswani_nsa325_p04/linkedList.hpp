@@ -19,6 +19,7 @@ public:
   List();
   ~List();
   void put(int loc, int data);
+  void pop();
   void print() const;
   void getListSize() const;
 };

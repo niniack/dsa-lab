@@ -15,10 +15,11 @@ int main(){
   cout << "This program demonstrates the list data structure implemented with ";
   cout << "a singly linked implementation and a put function." << endl << endl;
 
-  cout << "There are two functions: put and print." << endl;
+  cout << "There are three functions: put, pop, and print." << endl;
   cout << "Put accepts a location and a data value. It then adds a node to the ";
   cout << "given location, treating it as an index." << endl;
   cout << "Print simply prints out all the contents of the list from head to tail.";
+  cout << "Pop works as if on a stack, removing the top element.";
   cout << endl << endl;
 
   // Queue stack;
@@ -58,6 +59,12 @@ int main(){
   cout << "It does not make sense to add a node at index 7 if the list ";
   cout << "is only 6 nodes long (has 5 indices)." << endl << endl;
   list.put(7, 15);
+
+  cout << "We can also verify the pop functionality to remove a few values " << endl;
+  cout << "from the top of the list. " << endl << endl;
+  list.pop();
+  list.pop();
+  list.print();
 
   return 0;
 }
