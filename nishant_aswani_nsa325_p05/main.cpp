@@ -19,7 +19,7 @@ int main(){
 
     while (flag){
       cout << endl;
-      cout << "Menu for Que Data Type with a Doubly Linked List" << endl;
+      cout << "Menu for Double-Ended Queue Data Type with a Doubly Linked List" << endl;
       cout << "*******************************" << endl;
       cout << "(1) Add a value to the front" << endl;
       cout << "(2) Add a value to the back" << endl;
