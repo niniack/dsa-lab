@@ -170,11 +170,11 @@ void Deque::getListSize() const{
 void Deque::print() const{
   Node *walk;
   walk = head;
-  
+
   cout << endl;
   getListSize();
 
-  cout << "Contents of the stack: " << endl;
+  cout << "Contents of the double-ended queue: " << endl;
   cout << "--------" << endl;
 
   while(walk!=nullptr){

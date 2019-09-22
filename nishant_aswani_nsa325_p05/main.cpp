@@ -25,7 +25,7 @@ int main(){
       cout << "(2) Add a value to the back" << endl;
       cout << "(3) Remove a value from the front" << endl;
       cout << "(4) Remove a value from the back" << endl;
-      cout << "(5) Display the contents of the que" << endl;
+      cout << "(5) Display the contents of the double-ended queue" << endl;
       cout << "(6) Exit program" << endl;
       cout << endl;
       cout << "Enter your numerical choice and press return: " << endl;
