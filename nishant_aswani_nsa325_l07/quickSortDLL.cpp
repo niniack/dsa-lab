@@ -10,6 +10,19 @@
 
 using namespace std;
 
+Data::Data(double initSpeed, int initICA, int initICB): speed(initSpeed), ica(initICA), icb(initICB) {};
+
+Data::Data() {};
+Data::~Data() {};
+
+int Data::getAverage(){
+  int avg;
+  avg = (ica+icb)/2;
+  return avg;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 DoubleLinkedList::DoubleLinkedList(): listSize(0) {};
 
 int DoubleLinkedList::position = 0;
@@ -20,14 +33,14 @@ DoubleLinkedList::DoubleLinkedList(DoubleLinkedList const &list): listSize(0), h
     return;
   }
 
-  headPush(list.getHead()->data);
+  headPush(list.getHead()->stats);
 
   Node *walkOriginal = list.getHead()->next;
 
   int originalListSize = list.getListSize();
 
   for (int i=0; i < originalListSize-1; ++i){
-    tailPush(walkOriginal->data);
+    tailPush(walkOriginal->stats);
     walkOriginal = walkOriginal->next;
   }
 
@@ -35,7 +48,7 @@ DoubleLinkedList::DoubleLinkedList(DoubleLinkedList const &list): listSize(0), h
 
 DoubleLinkedList::~DoubleLinkedList() {};    // destructor
 
-void DoubleLinkedList::headPush(int data){
+void DoubleLinkedList::headPush(Data stats){
 
   // increment the static position value
   ++position;
@@ -50,7 +63,7 @@ void DoubleLinkedList::headPush(int data){
   }
 
   // assign data to node
-  temp->data = data;
+  temp->stats = stats;
 
   temp->position = position;
 
@@ -74,7 +87,7 @@ void DoubleLinkedList::headPush(int data){
 
 };
 
-void DoubleLinkedList::tailPush(int data){
+void DoubleLinkedList::tailPush(Data stats){
 
   // increment the static position value
   ++position;
@@ -89,7 +102,7 @@ void DoubleLinkedList::tailPush(int data){
   }
 
   // assign data to node
-  temp->data = data;
+  temp->stats = stats;
 
   temp->position = position;
 
@@ -131,40 +144,53 @@ void DoubleLinkedList::quickSort(Node *low, Node *high){
 
   pa = partition(low, high);
 
+  cout << "lowPos" << low->position << endl;
+  cout << "pa" << pa->position << endl;
+  cout << "highPos" << high->position << endl;
+  cout << endl;
+
+
   if (pa->next != NULL){
     quickSort(low, pa->prev);
     quickSort(pa->next, high);
   }
+
+  else {
+    quickSort(low, pa->prev);
+    // quickSort(pa->next, high);
+  }
+
 }
 
 Node *DoubleLinkedList::partition(Node *low, Node *high){
 
-  int pivot = high->data;
+  int pivot = high->stats.getAverage();
 
   Node *walkForward = low;
   Node *walkBackward = high->prev;
 
   while (walkForward->position <= walkBackward->position){
 
-    while (walkForward->data < high->data){
+    while (walkForward->stats.getAverage() < pivot && walkForward->position < walkBackward->position){
       walkForward = walkForward->next;
     }
 
-    while (walkBackward->data >= high->data){
+    while (walkBackward->stats.getAverage() >= pivot && walkForward->position < walkBackward->position){
       walkBackward = walkBackward->prev;
     }
 
     if (walkForward->position == walkBackward->position){
       swapNodeContent(walkBackward, high);
+      break;
     }
 
-    if (walkForward->data >= pivot && walkForward->position < walkBackward->position){
+    if (walkForward->stats.getAverage() >= pivot && walkForward->position < walkBackward->position){
       swapNodeContent(walkForward, walkBackward);
     }
 
   }
 
-  if (high->data >= walkBackward->data){
+  if (high->stats.getAverage() >= walkBackward->stats.getAverage()){
     swapNodeContent(walkForward, high);
   }
 
@@ -173,10 +199,11 @@ Node *DoubleLinkedList::partition(Node *low, Node *high){
 
 void DoubleLinkedList::swapNodeContent(Node *nodeA, Node *nodeB){
 
-  int temp = nodeA->data;
-  nodeA->data = nodeB->data;
-  nodeB->data = temp;
-
+  Data temp = nodeA->stats;
+  nodeA->stats = nodeB->stats;
+  nodeB->stats = temp;
+  cout << "Swapping Node " << nodeA->stats.getAverage() << " with " << nodeB->stats.getAverage();
+  cout << endl;
   this->print();
 }
 
@@ -224,7 +251,7 @@ void DoubleLinkedList::print() const{
   cout << "--------" << endl;
 
   while(walk!=nullptr){
-    cout << walk->data << endl;
+    cout << walk->stats.getAverage() << endl;
     cout << endl;
     cout << "--------" << endl;
     walk = walk->next;

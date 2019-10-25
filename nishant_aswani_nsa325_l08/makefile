@@ -1,12 +1,12 @@
 #  File: makefile
 #  Name: Nishant Aswani
 #  Instructor: Cristoforos Vasilatos
-#  Assignment: Lab 7
+#  Assignment: Lab 8
 #  Course: Data Structures and Algorithms (ENGR-UH 3510) Fall 2019
-#  Due: Oct 7 2019
+#  Due: Oct 23 2019
 
-PROG = lab7
-OUT = lab7_output
+PROG = lab8
+OUT = lab8_output
 CC = g++
 CPPFLAGS = -g -Wall
 

@@ -64,6 +64,12 @@ void quickSort(int values[10], int low, int high){
 
   pi = partition(values, low, high);
 
+  // print sorted
+  cout << endl;
+
+  for (int i=0; i<8; ++i){
+    cout << values[i] << ", ";
+  }
   quickSort(values, low, pi-1);
   quickSort(values, pi+1, high);
 
@@ -71,7 +77,7 @@ void quickSort(int values[10], int low, int high){
 
 int main(){
 
-  int values[10] {5,5,5,7,6,6,6,3,2,1};
+  int values[8] {3,2,4,1,1,1,1,2};
   int size = sizeof(values)/sizeof(values[0]);
 
   // print original
@@ -82,7 +88,7 @@ int main(){
   }
   cout << endl << endl;
 
-  quickSort(values, 0, 9);
+  quickSort(values, 0, 7);
 
   // print sorted
   cout << "Sorted Array:" << endl;

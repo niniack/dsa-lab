@@ -5,17 +5,21 @@
 //  Course: Data Structures and Algorithms (ENGR-UH 3510) Fall 2019
 //  Due: Oct 7 2019
 
-// class Data{
-//   public:
-//     int CPUSpeed;
-//     int InstructionsA;
-//     int InstructionsB;
-// };
+class Data{
+  public:
+    Data();
+    Data(double initSpeed, int initICA, int initICB);
+    ~Data();
+    double speed;
+    int ica;
+    int icb;
+    int getAverage();
+};
 
 class Node{
   public:
     int position;
-    int data;
+    Data stats;
     Node *next;
     Node *prev;
 };
@@ -43,8 +47,8 @@ class DoubleLinkedList{
     ~DoubleLinkedList();
 
     // primary methods
-    void headPush(int data);
-    void tailPush(int data);
+    void headPush(Data stats);
+    void tailPush(Data stats);
     void quickSort(Node *low, Node *high);
 
     // helper methods
