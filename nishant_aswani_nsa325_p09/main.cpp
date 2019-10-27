@@ -20,7 +20,7 @@ int main(){
     tree.insertNode(values[i]);
   }
   cout << endl;
-
+  cout << "Pre-order: ";
   tree.preOrder(tree.getRoot());
   cout << endl;
 
@@ -28,8 +28,6 @@ int main(){
 
   for (unsigned int i=0; i<removalValues.size(); ++i){
     tree.deleteNode(tree.getRoot(), removalValues[i]);
-    tree.preOrder(tree.getRoot());
-    cout << endl;
   }
 
 }

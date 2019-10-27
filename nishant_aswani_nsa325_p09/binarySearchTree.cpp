@@ -93,7 +93,7 @@ void BST::deleteNode(Node* top, int data){
   // if node to be deleted is null, then return null
   if (walk == nullptr){
     cout << endl;
-    cout << "Sorry value " << data << " was not found in the tree!" << endl;
+    cout << "Sorry, value " << data << " was not found in the tree!" << endl;
     cout << endl;
     return;
   }
@@ -156,6 +156,10 @@ void BST::deleteNode(Node* top, int data){
 
     delete(walk);
   }
+
+  cout << "Pre-order: ";
+  preOrder(getRoot());
+  cout << endl;
 }
 
 void BST::_firstInsertion(int data){
