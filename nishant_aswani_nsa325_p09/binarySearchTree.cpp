@@ -93,7 +93,7 @@ void BST::deleteNode(Node* top, int data){
   // if node to be deleted is null, then return null
   if (walk == nullptr){
     cout << endl;
-    cout << "Sorry node of value " << data << " is not available for deletion!" << endl;
+    cout << "Sorry value " << data << " was not found in the tree!" << endl;
     cout << endl;
     return;
   }
