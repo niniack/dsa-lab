@@ -17,6 +17,7 @@ class BST{
     Node* root;
     int numberOfNodes;
     void _firstInsertion(int data);
+    void _findKey(Node* &walk, int data, Node* &parent);
     Node* _minNode(Node* top);
 
   public:
@@ -26,7 +27,7 @@ class BST{
 
     //driver
     void insertNode(int data);
-    Node* deleteNode(Node* top, int data);
+    void deleteNode(Node* top, int data);
 
     //print functions
     void preOrder(Node* top);

@@ -63,92 +63,96 @@ Node* BST::_minNode(Node* top){
 
 }
 
-Node* BST::deleteNode(Node* top, int data){
+void BST::_findKey(Node* &walk, int data, Node* &parent){
+  while (walk != nullptr && walk->data != data){
 
-  // Base case
-  if (top == nullptr){
-    cout << endl << "Sorry, this node is not available for deletion." << endl;
-    return top;
+    parent = walk;
+
+    // if given key is less than the current node, go to left subtree
+		// else go to right subtree
+		if (data < walk->data){
+      walk = walk->left;
+    }
+		else{
+      walk = walk->right;
+    }
+  }
+}
+
+void BST::deleteNode(Node* top, int data){
+
+  // parent of to be deleted
+  Node* parent = nullptr;
+  // node to be deleted
+  Node* walk = top;
+
+  // updated parent and walker to correct position
+  // based on key
+  _findKey(walk, data, parent);
+  
+  // if node to be deleted is null, then return null
+  if (walk == nullptr){
+    return;
   }
 
-  // if data < top, then move to the left subtree
-  // returns the proper node to be successor
-  if (data < top->data){
-    top->left = deleteNode(top->left, data);
-  }
+  // Case 1: leaf node
+  if (walk->left == nullptr && walk->right == nullptr){
 
-  // if data > top, then move to the right subtree
-  // returns the proper node to be successor
-  else if (data > top->data){
-    top->right = deleteNode(top->right, data);
-  }
+    // if not root node
+    if (walk != root){
+      // sever the link
+      if (parent->left == walk){
+        parent->left = nullptr;
+      }
 
-  // finally if data == top, then we delete that
-  else {
-
-    // if left child is empty, return right
-    if (top->left == nullptr && top != root){
-      Node* temp = top->right;
-      delete(top);
-      --numberOfNodes;
-      return temp;
+      else {
+        parent->right = nullptr;
+      }
     }
 
-    // if right child is empty, return left
-    else if (top->right == nullptr && top != root){
-      Node* temp = top->left;
-      delete(top);
-      --numberOfNodes;
-      return temp;
-    }
-
-    // if both children exist, then
-    // find min value in right subtree as successor when possible
-
-    // or it is root missing a child
+    // if it is root, set root to null
     else{
-
-      // check if final node
-      if(top->right == nullptr && top->left == nullptr){
-        delete(top);
-        root = nullptr;
-        return nullptr;
-      }
-
-      if (top == root){
-        if (top->right == nullptr){
-          top->data = top->left->data;
-          top->left = deleteNode(top->left, top->left->data);
-          return top;
-        }
-
-        else if (top->left == nullptr){
-          top->data = top->right->data;
-          top->right = deleteNode(top->right, top->right->data);
-          return top;
-        }
-      }
-      // find successor
-      Node* temp = _minNode(top->right);
-      // store value of successor in top
-      top->data = temp->data;
-      // "properly" delete the source of the successor
-
-      // save val to top->right
-      if (top->data == top->right->data){
-        top->right = deleteNode(top->right, temp->data);
-      }
-
-      // don't save val to top->right
-      else{
-        deleteNode(top->right, temp->data);
-      }
-
+      root = nullptr;
     }
 
+    // delete the leaf
+    delete(walk);
   }
 
-  return top;
+  // Case 2: has two children
+  else if (walk->left && walk->right){
+
+    // find the successor in right subtree
+    Node* successor = _minNode(walk->right);
+    // temp store value of succesor in node
+    int val = successor->data;
+    // delete the node where successor value was taken
+    deleteNode(top, val);
+    // store value to node
+    walk->data = val;
+  }
+
+  // Case 3: has one child
+  else {
+    // check which side is not null
+    Node* child = (walk->left)? walk->left : walk->right;
+
+    // if to be deleted is not root
+    if (walk != root){
+      if (walk == parent->left){
+        parent->left = child;
+      }
+      else{
+        parent->right = child;
+      }
+    }
+
+    else{
+      root = child;
+    }
+
+    delete(walk);
+  }
 }
 
 void BST::_firstInsertion(int data){

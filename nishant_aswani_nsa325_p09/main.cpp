@@ -24,17 +24,12 @@ int main(){
   tree.preOrder(tree.getRoot());
   cout << endl;
 
-  vector<int> removalValues {15, 10, 20, 8, 12, 18, 25, 16};
+  vector<int> removalValues {1, 8, 30, 20, 16, 12, 18, 25, 15, 19, 10};
 
   for (unsigned int i=0; i<removalValues.size(); ++i){
     tree.deleteNode(tree.getRoot(), removalValues[i]);
     tree.preOrder(tree.getRoot());
     cout << endl;
   }
-
-  cout << tree.getRoot()->right->data << endl;
-
-
-
 
 }
