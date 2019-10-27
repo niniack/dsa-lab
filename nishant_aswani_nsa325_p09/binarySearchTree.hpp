@@ -14,10 +14,10 @@ class Node{
 
 class BST{
   private:
-    Node *root;
+    Node* root;
     int numberOfNodes;
     void _firstInsertion(int data);
-    Node* _minRightNode(Node* root);
+    Node* _minNode(Node* top);
 
   public:
     //const deconst
@@ -26,12 +26,12 @@ class BST{
 
     //driver
     void insertNode(int data);
-    Node* deleteNode(Node* root, int data);
+    Node* deleteNode(Node* top, int data);
 
     //print functions
-    void preOrder(Node* root);
-    void postOrder(Node* root);
-    void inOrder(Node* root);
+    void preOrder(Node* top);
+    void postOrder(Node* top);
+    void inOrder(Node* top);
 
     //utility
     int getNumNodes() const;

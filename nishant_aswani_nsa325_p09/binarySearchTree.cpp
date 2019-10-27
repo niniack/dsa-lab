@@ -14,31 +14,35 @@ using namespace std;
 BST::BST(): root(nullptr), numberOfNodes(0) {};
 BST::~BST() {};
 
-void BST::inOrder(Node* root){
-  if (root == nullptr){
+void BST::inOrder(Node* top){
+  if (top == nullptr){
     return;
   }
 
-  Node* walk = root;
+  Node* walk = top;
   preOrder(walk->left);
   cout << walk->data << ", ";
   preOrder(walk->right);
 }
 
-void BST::preOrder(Node* root){
+void BST::preOrder(Node* top){
 
   if (root == nullptr){
+    cout << "Tree is empty" << endl;
+  }
+
+  if (top == nullptr){
     return;
   }
 
-  Node* walk = root;
+  Node* walk = top;
   cout << walk->data << ", ";
   preOrder(walk->left);
   preOrder(walk->right);
 }
 
-void BST::postOrder(Node* root){
-  if (root == nullptr){
+void BST::postOrder(Node* top){
+  if (top == nullptr){
     return;
   }
 
@@ -48,10 +52,10 @@ void BST::postOrder(Node* root){
   cout << walk->data << ", ";
 }
 
-Node* BST::_minRightNode(Node* root){
-  Node* walk = root;
+Node* BST::_minNode(Node* top){
+  Node* walk = top;
 
-  while (walk->left !=  nullptr){
+  while (walk && walk->left !=  nullptr){
     walk = walk->left;
   }
 
@@ -59,62 +63,92 @@ Node* BST::_minRightNode(Node* root){
 
 }
 
-Node* BST::deleteNode(Node* root, int data){
+Node* BST::deleteNode(Node* top, int data){
 
   // Base case
-  if (root == nullptr){
-    return root;
+  if (top == nullptr){
+    cout << endl << "Sorry, this node is not available for deletion." << endl;
+    return top;
   }
 
-  Node* temp = nullptr;
-
-  // if data < root, then move to the left subtree
+  // if data < top, then move to the left subtree
   // returns the proper node to be successor
-  if (data < root->data){
-    root->left = deleteNode(root->left, data);
+  if (data < top->data){
+    top->left = deleteNode(top->left, data);
   }
 
-  // if data > root, then move to the right subtree
+  // if data > top, then move to the right subtree
   // returns the proper node to be successor
-  else if (data > root->data){
-    root->right = deleteNode(root->right, data);
+  else if (data > top->data){
+    top->right = deleteNode(top->right, data);
   }
 
-  // finally if data == root, then we delete that
+  // finally if data == top, then we delete that
   else {
 
     // if left child is empty, return right
-    if (root->left == nullptr){
-      temp = root->right;
-      delete(root);
+    if (top->left == nullptr && top != root){
+      Node* temp = top->right;
+      delete(top);
       --numberOfNodes;
       return temp;
     }
 
     // if right child is empty, return left
-    else if (root->right == nullptr){
-      temp = root->left;
-      delete(root);
+    else if (top->right == nullptr && top != root){
+      Node* temp = top->left;
+      delete(top);
       --numberOfNodes;
       return temp;
     }
 
     // if both children exist, then
-    // find min value in right subtree as successor
-    else{
-      // find successor
-      temp = _minRightNode(root->right);
-      
-      // store value of successor in root
-      root->data = temp->data;
+    // find min value in right subtree as successor when possible
 
+    // or it is root missing a child
+    else{
+
+      // check if final node
+      if(top->right == nullptr && top->left == nullptr){
+        delete(top);
+        root = nullptr;
+        return nullptr;
+      }
+
+      if (top == root){
+        if (top->right == nullptr){
+          top->data = top->left->data;
+          top->left = deleteNode(top->left, top->left->data);
+          return top;
+        }
+
+        else if (top->left == nullptr){
+          top->data = top->right->data;
+          top->right = deleteNode(top->right, top->right->data);
+          return top;
+        }
+      }
+      // find successor
+      Node* temp = _minNode(top->right);
+      // store value of successor in top
+      top->data = temp->data;
       // "properly" delete the source of the successor
-      root->right = deleteNode(root->right, temp->data);
+
+      // save val to top->right
+      if (top->data == top->right->data){
+        top->right = deleteNode(top->right, temp->data);
+      }
+
+      // don't save val to top->right
+      else{
+        deleteNode(top->right, temp->data);
+      }
+
     }
 
   }
 
-  return root;
+  return top;
 }
 
 void BST::_firstInsertion(int data){
