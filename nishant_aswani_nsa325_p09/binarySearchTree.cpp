@@ -89,9 +89,12 @@ void BST::deleteNode(Node* top, int data){
   // updated parent and walker to correct position
   // based on key
   _findKey(walk, data, parent);
-  
+
   // if node to be deleted is null, then return null
   if (walk == nullptr){
+    cout << endl;
+    cout << "Sorry node of value " << data << " is not available for deletion!" << endl;
+    cout << endl;
     return;
   }
 
