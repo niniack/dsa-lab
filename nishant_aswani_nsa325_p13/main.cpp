@@ -46,13 +46,18 @@ int main(){
   g.addEdge('g','i');
   g.addEdge('h','i');
   g.addEdge('i','l');
-
   cout << "# of Vertices: " << g.getNumVertices() << endl;
   cout << "# of Edges: " << g.getNumEdges() << endl;
 
-  cout << "Breadth First List: ";
+
+  cout << "Breadth First List (starting with a): ";
   //breadthFirstPrint(root);
   g.breadthFirstPrint('a');
+  cout << endl << endl;
+
+  cout << "Breadth First List (starting with m): ";
+  //breadthFirstPrint(root);
+  g.breadthFirstPrint('m');
   cout << endl << endl;
 
 

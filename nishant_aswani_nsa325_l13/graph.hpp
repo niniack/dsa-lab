@@ -14,18 +14,18 @@ using namespace std;
 class Node{
 
   private:
-    char data;
+    string data;
   public:
     // could have been implemented as a map as well
     list<Node*> adj;
-    Node(char initData);
-    char getData() const;
+    Node(string initData);
+    string getData() const;
 };
 
 class Graph{
   private:
-   // lookup map for all nodes based on char to avoid iterating
-    unordered_map<char, Node*> dir;
+   // lookup map for all nodes based on string to avoid iterating
+    unordered_map<string, Node*> dir;
     int numVertices;
     int numEdges;
 
@@ -35,14 +35,14 @@ class Graph{
 
     // driver methods
 
-    void addVertex(char data);
-    void addEdge(char source, char destination);
+    void addVertex(string data);
+    void addEdge(string source, string destination);
 
     // utility methods
     int getNumVertices() const;
     int getNumEdges() const;
-    void breadthFirstPrint(char rootChar);
-    // void depthFirstPrint(char rootChar);
+    void breadthFirstPrint(string rootChar);
+    void topSort();
 
 
 };

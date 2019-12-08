@@ -5,8 +5,8 @@
 #  Course: Data Structures and Algorithms (ENGR-UH 3510) Fall 2019
 #  Due: Nov 18 2019
 
-PROG = prelab13
-OUT = prelab13_output
+PROG = lab13
+OUT = lab13_output
 CC = g++
 CPPFLAGS = -g -Wall
 
